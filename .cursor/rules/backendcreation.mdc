@@ -1,0 +1,122 @@
+---
+alwaysApply: true
+---
+
+
+You are an expert in Java programming, Spring Boot, Spring Framework, Maven, and related Java technologies.
+
+Code Style and Structure
+- Write clean, efficient, and well-documented Java code with accurate Spring Boot examples.
+- Use Spring Boot best practices and conventions throughout your code.
+- Implement RESTful API design patterns when creating web services.
+- Use descriptive method and variable names following camelCase convention.
+- Structure Spring Boot applications: controllers, services, repositories, entities, models, configurations.
+
+Spring Boot Specifics
+- Use Spring Boot starters for quick project setup and dependency management.
+- Implement proper use of annotations (e.g., @SpringBootApplication, @RestController, @Service).
+- Utilize Spring Boot's auto-configuration features effectively.
+- Implement proper exception handling using @ControllerAdvice and @ExceptionHandler.
+
+Naming Conventions
+- Use PascalCase for class names (e.g., UserController, OrderService).
+- Use camelCase for method and variable names (e.g., findUserById, isOrderValid).
+- Use ALL_CAPS for constants (e.g., MAX_RETRY_ATTEMPTS, DEFAULT_PAGE_SIZE).
+
+Java and Spring Boot Usage
+- Use Java 21 or later features when applicable (e.g., records, sealed classes, pattern matching).
+- Leverage Spring Boot 3.x features and best practices.
+- Use Spring Data JPA for database operations when applicable.
+- Implement proper validation using Bean Validation (e.g., @Valid, custom validators).
+
+Configuration and Properties
+- Use application.properties or application.yml for configuration.
+- Implement environment-specific configurations using Spring Profiles.
+- Use @ConfigurationProperties for type-safe configuration properties.
+
+Performance and Scalability
+- Implement proper database indexing and query optimization.
+
+Security
+- Implement Spring Security for authentication and authorization.
+- Use proper password encoding (e.g., BCrypt).
+- Implement CORS configuration when necessary.
+
+
+Data Access and ORM
+- Use Spring Data JPA for database operations.
+- Implement proper entity relationships and cascading.
+
+Build
+- Use Maven for dependency management and build processes.
+
+Follow best practices for:
+- RESTful API design (proper use of HTTP methods, status codes, etc.).
+
+Architecture
+- Use hexagonal architecture with the necesary folders
+- Only Controllers must use and retrive ResponseEntity objects 
+
+Adhere to SOLID principles and maintain high cohesion and low coupling in your Spring Boot application design.
+    
+
+
+SCHEMAS
+TiposHabitos (
+    id_tipo_habito INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL -- Normal, Temporizador, Contador
+);
+
+EstadosHabitos (
+    id_estado INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(20) NOT NULL -- activo, completado, omitido
+);
+
+Habitos (
+    id_habito INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    id_tipo_habito INT NOT NULL,
+    id_estado INT NOT NULL DEFAULT 1, -- por defecto "activo"
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    recordatorio TIME,
+
+    -- FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario), --aun no
+    FOREIGN KEY (id_tipo_habito) REFERENCES TiposHabitos(id_tipo_habito),
+    FOREIGN KEY (id_estado) REFERENCES EstadosHabitos(id_estado)
+);
+
+Categorias (
+    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    color VARCHAR(20) NOT NULL
+);
+
+Habito_Categoria (
+    id_habito INT NOT NULL,
+    id_categoria INT NOT NULL,
+
+    PRIMARY KEY (id_habito, id_categoria),
+
+    FOREIGN KEY (id_habito) REFERENCES Habitos(id_habito),
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
+);
+
+HabitosTemporizados (
+    id_habito INT PRIMARY KEY,
+    duracion_objetivo INT NOT NULL,   -- en minutos
+    tiempo_logrado INT DEFAULT 0,     -- en minutos
+
+    FOREIGN KEY (id_habito) REFERENCES Habitos(id_habito)
+);
+
+
+HabitosContadores (
+    id_habito INT PRIMARY KEY,
+    repeticiones_objetivo INT NOT NULL,
+    repeticiones_logradas INT DEFAULT 0,
+
+    FOREIGN KEY (id_habito) REFERENCES Habitos(id_habito)
+);
