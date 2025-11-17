@@ -21,6 +21,12 @@ public class CategoriaController {
         return ResponseEntity.ok(categorias);
     }
 
+    @GetMapping("/byUser")
+    public ResponseEntity<List<Categoria>> getAllCategoriasByUser(@RequestParam (required = true) Long IdUsuario) {
+        List<Categoria> categorias = categoriaService.getAllCategoriasByUserId(IdUsuario);
+        return ResponseEntity.ok(categorias);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> getCategoriaById(@PathVariable Integer id) {
         Categoria categoria = categoriaService.getCategoriaById(id);

@@ -18,6 +18,10 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
+    public List<Categoria> getAllCategoriasByUserId(Long IdUsuario) {
+        return categoriaRepository.findByIdUsuario(IdUsuario);
+    }
+
     public Categoria getCategoriaById(Integer id) {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         return categoria.orElse(null);

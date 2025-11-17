@@ -20,3 +20,4 @@ public class HealthBackApplication implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 }
+    

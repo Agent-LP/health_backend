@@ -45,8 +45,9 @@ public class habitController {
     @PutMapping("/{id}")
     public ResponseEntity<HabitResponse> updateHabit(
             @PathVariable Integer id,
-            @RequestBody HabitRequest request) {
-        HabitResponse habitResponse = habitService.updateHabit(id, request);
+            @RequestBody HabitRequest request,
+            @RequestParam(required = false) Integer idUsuario) {
+        HabitResponse habitResponse = habitService.updateHabit(id, request, idUsuario);
         if (habitResponse == null) {
             return ResponseEntity.notFound().build();
         }

@@ -22,6 +22,9 @@ public class Categoria {
 
     @Column(name = "color", nullable = false, length = 20)
     private String color;
+
+    @Column(name = "id_usuario", nullable = false)
+    private Integer idUsuario;
 }
 
 

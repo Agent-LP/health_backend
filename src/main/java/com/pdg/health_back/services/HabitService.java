@@ -71,7 +71,7 @@ public class HabitService {
         if (request.getCategorias() != null && !request.getCategorias().isEmpty()) {
             Set<Categoria> categorias = new HashSet<>();
             for (CategoriaRequest categoriaRequest : request.getCategorias()) {
-                Categoria categoria = mapCategoriaRequestToEntity(categoriaRequest);
+                Categoria categoria = mapCategoriaRequestToEntity(categoriaRequest, idUsuario);
                 if (categoria.getIdCategoria() != null) {
                     Optional<Categoria> existingCategoria = categoriaRepository.findById(categoria.getIdCategoria());
                     if (existingCategoria.isPresent()) {
@@ -105,7 +105,7 @@ public class HabitService {
     }
 
     @Transactional
-    public HabitResponse updateHabit(Integer id, HabitRequest request) {
+    public HabitResponse updateHabit(Integer id, HabitRequest request, Integer idUsuario) {
         Optional<Habito> habitoOpt = habitRepository.findById(id);
         if (habitoOpt.isPresent()) {
             Habito habito = habitoOpt.get();
@@ -118,7 +118,7 @@ public class HabitService {
             if (request.getCategorias() != null) {
                 Set<Categoria> categorias = new HashSet<>();
                 for (CategoriaRequest categoriaRequest : request.getCategorias()) {
-                    Categoria categoria = mapCategoriaRequestToEntity(categoriaRequest);
+                    Categoria categoria = mapCategoriaRequestToEntity(categoriaRequest, idUsuario);
                     if (categoria.getIdCategoria() != null) {
                         Optional<Categoria> existingCategoria = categoriaRepository.findById(categoria.getIdCategoria());
                         if (existingCategoria.isPresent()) {
@@ -228,10 +228,11 @@ public class HabitService {
         return response;
     }
 
-    private Categoria mapCategoriaRequestToEntity (CategoriaRequest request){
+    private Categoria mapCategoriaRequestToEntity (CategoriaRequest request, Integer id_usuario){
         Categoria categoria = new Categoria();
         categoria.setNombre(request.getNombre());
         categoria.setColor(request.getColor());
+        categoria.setIdUsuario(id_usuario);
         return categoria;
     }
 
