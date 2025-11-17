@@ -1,6 +1,8 @@
 package com.pdg.health_back.models;
 
 import com.pdg.health_back.entities.Categoria;
+import com.pdg.health_back.entities.HabitoContador;
+import com.pdg.health_back.entities.HabitoTemporizado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,10 @@ public class HabitResponse {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private LocalTime recordatorio;
+    private String estado;
+    private String tipo;
+    private HabitoTemporizado habitoTemporizado;
+    private HabitoContador habitoContador;
 }
 
 

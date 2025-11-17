@@ -21,6 +21,8 @@ public class HabitRequest {
     private LocalTime recordatorio;
     
     private List<CategoriaRequest> categorias;
+    private RepeticionesRequest repeticiones;
+    private DuracionRequest duracion;
 }
 
 

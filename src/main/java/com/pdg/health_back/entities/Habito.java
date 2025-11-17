@@ -45,8 +45,6 @@ public class Habito {
     @Column(name = "recordatorio")
     private LocalTime recordatorio;
 
-    @Column(name = "progreso")
-    private Float progreso;
 
     @ManyToMany
     @JoinTable(

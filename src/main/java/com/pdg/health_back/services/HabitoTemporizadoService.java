@@ -2,6 +2,7 @@ package com.pdg.health_back.services;
 
 import com.pdg.health_back.entities.Habito;
 import com.pdg.health_back.entities.HabitoTemporizado;
+import com.pdg.health_back.models.DuracionRequest;
 import com.pdg.health_back.repositories.HabitRepository;
 import com.pdg.health_back.repositories.HabitoTemporizadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class HabitoTemporizadoService {
         return habitoTemporizadoRepository.save(habitoTemporizado);
     }
 
-    public HabitoTemporizado updateHabitoTemporizado(Integer idHabito, HabitoTemporizado habitoTemporizado) {
+    public HabitoTemporizado updateHabitoTemporizado(Integer idHabito, DuracionRequest habitoTemporizado) {
         Optional<Habito> habito = habitRepository.findById(idHabito);
         if (habito.isPresent()) {
             Optional<HabitoTemporizado> existing = habitoTemporizadoRepository.findByHabitoId(idHabito);

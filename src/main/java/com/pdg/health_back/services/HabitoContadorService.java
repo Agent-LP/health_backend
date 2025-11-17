@@ -2,6 +2,7 @@ package com.pdg.health_back.services;
 
 import com.pdg.health_back.entities.Habito;
 import com.pdg.health_back.entities.HabitoContador;
+import com.pdg.health_back.models.RepeticionesRequest;
 import com.pdg.health_back.repositories.HabitRepository;
 import com.pdg.health_back.repositories.HabitoContadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class HabitoContadorService {
         return habitoContadorRepository.save(habitoContador);
     }
 
-    public HabitoContador updateHabitoContador(Integer idHabito, HabitoContador habitoContador) {
+    public HabitoContador updateHabitoContador(Integer idHabito, RepeticionesRequest habitoContador) {
         Optional<Habito> habito = habitRepository.findById(idHabito);
         if (habito.isPresent()) {
             Optional<HabitoContador> existing = habitoContadorRepository.findByHabitoId(idHabito);
