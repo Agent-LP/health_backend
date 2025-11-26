@@ -7,10 +7,12 @@ import com.pdg.health_back.entities.HabitoContador;
 import com.pdg.health_back.entities.HabitoTemporizado;
 import com.pdg.health_back.entities.TipoHabito;
 import com.pdg.health_back.models.CategoriaRequest;
-import com.pdg.health_back.models.DuracionRequest;
-import com.pdg.health_back.models.HabitRequest;
-import com.pdg.health_back.models.HabitResponse;
-import com.pdg.health_back.models.RepeticionesRequest;
+import com.pdg.health_back.models.especialHabits.DuracionRequest;
+import com.pdg.health_back.models.especialHabits.DuracionResponse;
+import com.pdg.health_back.models.especialHabits.RepeticionesRequest;
+import com.pdg.health_back.models.especialHabits.RepeticionesResponse;
+import com.pdg.health_back.models.habits.HabitRequest;
+import com.pdg.health_back.models.habits.HabitResponse;
 import com.pdg.health_back.repositories.CategoriaRepository;
 import com.pdg.health_back.repositories.EstadoHabitoRepository;
 import com.pdg.health_back.repositories.HabitRepository;
@@ -216,13 +218,21 @@ public class HabitService {
         
         // Set type-specific objects if they exist
         if (habito.getIdTipo() == 2) {
-            Optional<HabitoContador> contadorOpt = 
-                habitoContadorRepository.findByHabitoId(habito.getIdHabito());
-            contadorOpt.ifPresent(response::setHabitoContador);
+            habitoContadorRepository.findByHabitoId(habito.getIdHabito()).ifPresent(contador -> {
+                RepeticionesResponse rep = new RepeticionesResponse();
+                rep.setIdHabito(contador.getIdHabito());
+                rep.setRepeticionesObjetivo(contador.getRepeticionesObjetivo());
+                rep.setRepeticionesLogradas(contador.getRepeticionesLogradas());
+                response.setHabitoContador(rep);
+            });
         } else if (habito.getIdTipo() == 3) {
-            Optional<HabitoTemporizado> temporizadoOpt = 
-                habitoTemporizadoRepository.findByHabitoId(habito.getIdHabito());
-            temporizadoOpt.ifPresent(response::setHabitoTemporizado);
+            habitoTemporizadoRepository.findByHabitoId(habito.getIdHabito()).ifPresent(temp -> {
+                DuracionResponse dur = new DuracionResponse();
+                dur.setIdHabito(temp.getIdHabito());
+                dur.setDuracionObjetivo(temp.getDuracionObjetivo());
+                dur.setTiempoLogrado(temp.getTiempoLogrado());
+                response.setHabitoTemporizado(dur);
+            });
         }
         
         return response;
@@ -285,6 +295,9 @@ public class HabitService {
         }
         if (request.getIdTipo() != null) {
             habito.setIdTipo(request.getIdTipo());
+        }
+        if (request.getIdEstado() != null) {
+            habito.setIdEstado(request.getIdEstado());
         }
     }
 }

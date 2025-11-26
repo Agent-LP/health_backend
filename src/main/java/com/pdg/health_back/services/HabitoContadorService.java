@@ -2,7 +2,7 @@ package com.pdg.health_back.services;
 
 import com.pdg.health_back.entities.Habito;
 import com.pdg.health_back.entities.HabitoContador;
-import com.pdg.health_back.models.RepeticionesRequest;
+import com.pdg.health_back.models.especialHabits.RepeticionesRequest;
 import com.pdg.health_back.repositories.HabitRepository;
 import com.pdg.health_back.repositories.HabitoContadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

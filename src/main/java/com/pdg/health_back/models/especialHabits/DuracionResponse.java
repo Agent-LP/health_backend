@@ -1,4 +1,4 @@
-package com.pdg.health_back.models;
+package com.pdg.health_back.models.especialHabits;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DuracionRequest {
+public class DuracionResponse{
+    private Integer idHabito;
     private Integer duracionObjetivo; // en minutos
     private Integer tiempoLogrado;
 }

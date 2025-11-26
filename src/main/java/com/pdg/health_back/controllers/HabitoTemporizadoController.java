@@ -1,7 +1,7 @@
 package com.pdg.health_back.controllers;
 
 import com.pdg.health_back.entities.HabitoTemporizado;
-import com.pdg.health_back.models.DuracionRequest;
+import com.pdg.health_back.models.especialHabits.DuracionRequest;
 import com.pdg.health_back.services.HabitoTemporizadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

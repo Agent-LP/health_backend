@@ -1,7 +1,7 @@
 package com.pdg.health_back.controllers;
 
-import com.pdg.health_back.models.HabitRequest;
-import com.pdg.health_back.models.HabitResponse;
+import com.pdg.health_back.models.habits.HabitRequest;
+import com.pdg.health_back.models.habits.HabitResponse;
 import com.pdg.health_back.services.HabitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
