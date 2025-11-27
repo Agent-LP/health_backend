@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HabitResponse {
+    private Integer idHabito;
     private Set<Categoria> categorias;
     private String nombre;
     private String descripcion;

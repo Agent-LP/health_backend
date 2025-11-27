@@ -201,6 +201,7 @@ public class HabitService {
 
     private HabitResponse mapToResponse(Habito habito) {
         HabitResponse response = new HabitResponse();
+        response.setIdHabito(habito.getIdHabito());
         response.setCategorias(habito.getCategorias());
         response.setNombre(habito.getNombre());
         response.setDescripcion(habito.getDescripcion());
@@ -262,7 +263,7 @@ public class HabitService {
         habitoTemporizado.setTiempoLogrado(
             request.getTiempoLogrado() != null ? request.getTiempoLogrado() : 0);
         return habitoTemporizado;
-    }
+    }   
 
     private Habito mapToEntity(HabitRequest request, Integer idUsuario) {
         Habito habito = new Habito();
