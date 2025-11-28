@@ -198,6 +198,21 @@ public class HabitService {
         return false;
     }
 
+    // HABIT STATE
+    public HabitResponse updateHabitState(Integer idHabit, String estado) {
+        Optional<Habito> habitoOpt = habitRepository.findById(idHabit);
+        if (habitoOpt.isPresent()) {
+            Habito habito = habitoOpt.get();
+            
+            updateHabitStateFromRequest(habito, estado);
+            Habito updatedHabito = habitRepository.save(habito);
+            return mapToResponse(updatedHabito); 
+        }
+        return null;
+    }
+
+
+    // ------------------- HELPERS ------------------------------
 
     private HabitResponse mapToResponse(Habito habito) {
         HabitResponse response = new HabitResponse();
@@ -301,4 +316,14 @@ public class HabitService {
             habito.setIdEstado(request.getIdEstado());
         }
     }
+
+    private void updateHabitStateFromRequest(Habito habito, String estado) {
+        if (estado == null) return;
+        switch (estado.toLowerCase()) {
+            case "completado" -> habito.setIdEstado(2);
+            case "omitido"    -> habito.setIdEstado(3);
+            case "activo"     -> habito.setIdEstado(1);
+        }
+    }
+    
 }

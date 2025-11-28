@@ -54,6 +54,17 @@ public class habitController {
         return ResponseEntity.ok(habitResponse);
     }
 
+    @PutMapping("/{idHabit}/estado")
+    public ResponseEntity<HabitResponse> updateHabitState(
+            @PathVariable Integer idHabit,
+            @RequestParam(required = true) String estado){
+        HabitResponse habitResponse = habitService.updateHabitState(idHabit, estado);
+        if (habitResponse == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(habitResponse);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHabit(@PathVariable Integer id) {
         boolean deleted = habitService.deleteHabit(id);
